@@ -1,44 +1,39 @@
-<html>
-  <body>
-    <!--Add the post-->
-    <form (ngSubmit)="addPost()">
-      <input
-        [(ngModel)]="postData.title"
-        name="title"
-        placeholder="Title"
-        required
-      />
-      <input
-        [(ngModel)]="postData.body"
-        name="body"
-        placeholder="Body"
-        required
-      />
-      <button type="submit">Add Post</button>
-    </form>
-    <!--GEt post by id-->
-    <input
-      [(ngModel)]="searchId"
-      placeholder="Enter id to fetch"
-      type="number"
-    />
-    <button (click)="fetchPostsById()">Get post by id</button>
-    <div *ngIf="singlePost">
-      <h4>Post ID:{{ singlePost.id }}</h4>
-      <p>{{ singlePost.title }}</p>
-      <p>{{ singlePost.body }}</p>
-    </div>
-    <hr />
-    <!--All Posts-->
-    <button (click)="getPosts()">Get All Posts</button>
-    <ul>
-      <li *ngFor="let post of posts">
-        <strong>{{ post.id }} - {{ post.title }}</strong>
-        <button (click)="editPost(post)">Edit</button>
-        <button (click)="deletePost(post.id!)">Delete</button>
-      </li>
-    </ul>
+<!-- Create / Update Form -->
+<form (ngSubmit)="isUpdateMode ? updatePost() : addPost()">
+  <input
+    [(ngModel)]="postData.title"
+    name="title"
+    placeholder="Title"
+    required
+  />
+  <input [(ngModel)]="postData.body" name="body" placeholder="Body" required />
+  <button type="submit">{{ isUpdateMode ? "Update Post" : "Add Post" }}</button>
+  <button type="button" *ngIf="isUpdateMode" (click)="cancelUpdate()">
+    Cancel
+  </button>
+</form>
 
-    <router-outlet></router-outlet>
-  </body>
-</html>
+<hr />
+
+<!-- Get Post by ID -->
+<input [(ngModel)]="searchId" placeholder="Enter ID to fetch" type="number" />
+<button (click)="fetchPostsById()">Get Post by ID</button>
+<div *ngIf="singlePost">
+  <h4>Post ID: {{ singlePost.id }}</h4>
+  <p>{{ singlePost.title }}</p>
+  <p>{{ singlePost.body }}</p>
+</div>
+
+<hr />
+
+<!-- ALL POSTS -->
+<button (click)="getPosts()">Get All Posts</button>
+<ul>
+  <li *ngFor="let post of posts">
+    <strong>{{ post.id }} - {{ post.title }}</strong>
+    <button (click)="editPost(post)">Edit</button>
+    <button (click)="deletePost(post.id!)">Delete</button>
+  </li>
+</ul>
+
+<router-outlet />
