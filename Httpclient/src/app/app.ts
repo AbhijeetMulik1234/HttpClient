@@ -29,6 +29,7 @@ export class App implements OnInit {
   }
   getPosts() {
     debugger;
+    alert('Get all posts');
     this.postService.getPosts().subscribe({
       next: (data) => {
         debugger;
