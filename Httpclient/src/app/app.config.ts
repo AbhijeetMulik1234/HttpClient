@@ -16,6 +16,7 @@ import {
 import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 import { loaderinterceptor } from './core/interceptors/loader-interceptor';
+import { errorInterceptor } from './core/interceptors/error-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,11 +33,11 @@ export const appConfig: ApplicationConfig = {
       multi: true,
     },
     // errorinterceptor register as a class
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: errorInterceptor,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: errorInterceptor,
+      multi: true,
+    },
     // loaderinterceptor register as a class
     {
       provide: HTTP_INTERCEPTORS,
