@@ -16,6 +16,7 @@ export class loaderinterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    alert('alert interceptor called');
     this.loader.show();
 
     return next.handle(req).pipe(

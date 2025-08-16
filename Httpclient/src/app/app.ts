@@ -27,15 +27,12 @@ export class App implements OnInit {
   ngOnInit() {
     // ithe set kela dummy token
     localStorage.setItem('token', 'dummy-test-token');
-    debugger;
     this.getPosts();
   }
   getPosts() {
-    debugger;
     alert('Get all posts');
     this.postService.getPosts().subscribe({
       next: (data) => {
-        debugger;
         this.posts = data;
       },
       error: (err) => {
@@ -44,11 +41,9 @@ export class App implements OnInit {
     });
   }
   fetchPostsById() {
-    debugger;
     if (this.searchId == 0) return;
     this.postService.getPost(this.searchId).subscribe({
       next: (data) => {
-        debugger;
         this.singlePost = data;
       },
       error: (err) => console.error(err),
@@ -57,7 +52,6 @@ export class App implements OnInit {
   addPost() {
     this.postService.createPost(this.postData).subscribe({
       next: (data) => {
-        debugger;
         this.posts.unshift(data);
         this.postData = { title: '', body: '', userId: 1 };
       },
@@ -65,7 +59,6 @@ export class App implements OnInit {
     });
   }
   editPost(post: Post) {
-    debugger;
     this.isUpdateMode = true;
     this.updateId = post.id || null;
     this.postData = { title: post.title, body: post.body, userId: post.userId };
@@ -84,7 +77,6 @@ export class App implements OnInit {
   deletePost(id: number) {
     this.postService.deletePost(id).subscribe({
       next: () => {
-        debugger;
         this.posts = this.posts.filter((p) => p.id !== id);
       },
       error: (err) => console.error(err),

@@ -13,7 +13,6 @@ export class authInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    debugger;
     alert('auth interceptor called');
     // example : for attach jwt token
     const token = localStorage.getItem('token');
