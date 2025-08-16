@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { Appservice } from './appservice';
 import { Post } from './Interface/posts';
+import { Loadercomponent } from './loadercomponent/loadercomponent';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, FormsModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, Loadercomponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -24,6 +25,8 @@ export class App implements OnInit {
   constructor(private postService: Appservice) {}
 
   ngOnInit() {
+    // ithe set kela dummy token
+    localStorage.setItem('token', 'dummy-test-token');
     debugger;
     this.getPosts();
   }
